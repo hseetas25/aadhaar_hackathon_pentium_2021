@@ -1,51 +1,5 @@
 .navbar-brand {
-    font-weight: 900;
-    letter-spacing: 4px;
     text-transform: uppercase;
-}
-
-.nav-link {
-    border-radius: 8px;
-    font-weight: 700;
-}
-
-.nav-link:hover {
-    background-color: var(--theme-25);
-}
-
-@media(max-width: 767px) {
-    /* MOBILE SIZE */
-
-    .navbar-nav {
-        padding: 8px 0;
-    }
-
-    .nav-link {
-        padding: 8px;
-    }
-}
-
-@media(min-width: 768px) {
-    /* DESKTOP SIZE */
-    
-    .nav-link{
-        /* position-relative for achieving "colored pill" under Active Nav Link, Styling done by the below written pseudo class ':after' */
-        position: relative;
-        padding: 16px 0;
-        margin: 0 16px;
-    }
-
-    .active::after {
-        /* For the "colored pill" style to indicate Active Nav Link */   
-        background-color: var(--theme-col);
-        border-radius: 2px;
-        content: " ";
-        height: 4px;
-        width: 16px;
-        position: absolute;
-        bottom: 10%;
-        left: 50%;
-        transform: translateX(-50%);
-    } 
-
+    font-weight: bolder;
+    letter-spacing: 4px;
 }
