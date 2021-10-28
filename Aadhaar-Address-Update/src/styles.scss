@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+/* 
+    * ---------- GLOBAL STYLES - styles.scss ----------
+    |
+    | NOTES:
+    | * Colors have been declared here and they are system-theme-aware
+    | * Default Font: Inter (Google Fonts)
+    |
+    * ----------------------------------------------------
+*/
+style {
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+}
+
+:root {
+    /* GLOBAL */
+    --theme-25: rgba(127, 162, 214, 0.25);
+    --theme-50: rgba(127, 162, 214, 0.5);
+    --theme-75: rgba(127, 162, 214, 0.75);
+    --theme-col: rgb(127, 162, 214);
+    
+
+    /* LIGHT THEME */
+    --theme-active: rgb(27, 58, 105);
+    --bg-col: rgb(241, 250, 247);
+    --text-col: #1e1e1e;
+    --link-col: #4d4d4d;
+    --border-col: #dedede;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ================================================================ */
+/* BUTTONS                                                          */
+/* ================================================================ */
+
+.btn-primary {
+    border-color: var(--theme-col);
+    border-radius: 16px;
+
+    background-color: var(--theme-50);
+    color: var(--text-col);
+}
+
+.btn-primary:hover {
+    border-color: var(--theme-active);
+    background-color: var(--theme-active);
+
+    color: var(--bg-col);
+}
+
+.btn-primary:active, .btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem var(--theme-col) !important;
+    background-color: var(--theme-active) !important;
+    
+    border-color: var(--theme-active);
+    color: var(--bg-col);
+}
