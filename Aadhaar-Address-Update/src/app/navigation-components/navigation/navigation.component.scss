@@ -1,5 +1,57 @@
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid var(--border-col);
+}
+
 .navbar-brand {
     text-transform: uppercase;
-    font-weight: bolder;
+    font-weight: 900;
     letter-spacing: 4px;
+}
+
+.nav-link {
+    font-weight: 600;
+}
+
+@media(max-width: 767px) {
+    /* MOBILE VIEWPORT */
+    .navbar-nav {
+        padding: 8px 0;
+    }
+
+    .nav-link {
+        padding: 8px;
+        position: relative; // For highlight beside active nav link
+    }
+
+    .active::after {        // For highlight beside active nav link
+        background-color: var(--theme-col);
+        border-radius: 4px 0 0 4px;
+        content: " ";
+        height: 60%;        // Calculated. Do not change unless required
+        width: 4px;
+        position: absolute;
+        left: 0;
+        bottom: 20%;        // Calculated. Do not change unless required
+    }
+}
+
+@media(min-width: 768px) {
+    /* DESKTOP VIEWPORT*/
+
+    .nav-link {
+        margin: 0 16px;     // For spacing between nav-links
+        position: relative; // For highlight under active nav link
+    }
+
+    .active::after {        // For highlight under active nav link
+        background-color: var(--theme-col);
+        border-radius: 4px 4px 0 0;
+        content: " ";
+        height: 4px;
+        width: 100%;
+        position: absolute;
+        bottom: -18px;      // Calculated. Do not change unless required
+        right: 0;
+    }
 }

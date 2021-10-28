@@ -13,14 +13,14 @@ style {
 
 :root {
     /* GLOBAL */
-    --theme-25: rgba(127, 162, 214, 0.25);
-    --theme-50: rgba(127, 162, 214, 0.5);
-    --theme-75: rgba(127, 162, 214, 0.75);
-    --theme-col: rgb(127, 162, 214);
+    --theme-25: rgba(211, 40, 40, 0.25);
+    --theme-50: rgba(211, 40, 40, 0.5);
+    --theme-75: rgba(211, 40, 40, 0.75);
+    --theme-col: rgb(211, 40, 40);
     
 
     /* LIGHT THEME */
-    --theme-active: rgb(27, 58, 105);
+    --theme-active: rgb(148, 28, 28);
     --bg-col: rgb(241, 250, 247);
     --text-col: #1e1e1e;
     --link-col: #4d4d4d;
@@ -36,10 +36,10 @@ body {
 /* ================================================================ */
 
 .btn-primary {
-    border-color: var(--theme-col);
-    border-radius: 16px;
+    border-color: var(--theme-50);
+    border-radius: 12px;
 
-    background-color: var(--theme-50);
+    background-color: var(--theme-25);
     color: var(--text-col);
 }
 
