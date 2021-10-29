@@ -1,0 +1,15 @@
+.login-card {
+    // This div is a bootstrap container...
+    // Hence, only change vertical padding  
+    border-radius: 16px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.form-group {
+    padding-bottom: 1rem;
+}
+
+.form-group > label {
+    padding-bottom: 0.5rem;
+}

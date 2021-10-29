@@ -1,12 +1,9 @@
 .navbar {
     background-color: white;
-    border-bottom: 1px solid var(--border-col);
 }
 
 .navbar-brand {
-    text-transform: uppercase;
     font-weight: 900;
-    letter-spacing: 4px;
 }
 
 .nav-link {
@@ -16,7 +13,7 @@
 @media(max-width: 767px) {
     /* MOBILE VIEWPORT */
     .navbar-nav {
-        padding: 8px 0;
+        padding: 16px 0;
     }
 
     .nav-link {
@@ -51,7 +48,7 @@
         height: 4px;
         width: 100%;
         position: absolute;
-        bottom: -18px;      // Calculated. Do not change unless required
+        bottom: -12px;      // Calculated. Do not change unless required
         right: 0;
     }
 }

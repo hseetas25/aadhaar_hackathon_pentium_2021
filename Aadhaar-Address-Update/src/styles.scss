@@ -13,14 +13,14 @@ style {
 
 :root {
     /* GLOBAL */
-    --theme-25: rgba(211, 40, 40, 0.25);
-    --theme-50: rgba(211, 40, 40, 0.5);
-    --theme-75: rgba(211, 40, 40, 0.75);
-    --theme-col: rgb(211, 40, 40);
+    --theme-25: rgba(250, 180, 1, 0.25);
+    --theme-50: rgba(250, 180, 1, 0.5);
+    --theme-75: rgba(250, 180, 1, 0.75);
+    --theme-col: rgb(250, 180, 1);
     
 
     /* LIGHT THEME */
-    --theme-active: rgb(148, 28, 28);
+    --theme-active: rgb(190, 137, 3);
     --bg-col: rgb(241, 250, 247);
     --text-col: #1e1e1e;
     --link-col: #4d4d4d;
@@ -32,12 +32,28 @@ body {
 }
 
 /* ================================================================ */
+/* HEADINGS & PARAGRAPHS                                            */
+/* ================================================================ */
+h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+}
+
+h4 {
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+
+/* ================================================================ */
 /* BUTTONS                                                          */
 /* ================================================================ */
 
 .btn-primary {
     border-color: var(--theme-50);
-    border-radius: 12px;
+    border-radius: 8px;
 
     background-color: var(--theme-25);
     color: var(--text-col);

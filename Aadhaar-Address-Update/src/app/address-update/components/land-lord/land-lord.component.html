@@ -1,44 +1,57 @@
-<div class="container">
-    <h3 style="text-align: center; margin-top:10px; margin-bottom:10px"><b>Land Lord Login Form</b></h3>
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6">
-            <form [formGroup]="landLordLoginForm">
-                <div class="form-group">
-                    <label>
-                        Aadhar Number
-                        <span class="mandatory"> *</span>
-                    </label>
-                    <input type="number"
-                           class="form-control"
-                           formControlName="aadhaarNumber"
-                           autocomplete="off"
-                           [class.border-danger]="landLordLoginForm.get('aadhaarNumber').invalid && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isFormSubmitted)"/>
-                        <div *ngFor="let validation of validationMessages.aadhaarNumber">
-                            <small class="text-danger error" *ngIf="landLordLoginForm.get('aadhaarNumber').hasError(validation.type) && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isFormSubmitted)">
-                                     {{validation.message}}
-                            </small>
-                         </div>
-                </div>
-                <div class="form-group">
-                    <label>
-                        OTP
-                        <span class="mandatory"> *</span>
-                    </label>
-                    <input type="number"
-                           class="form-control"
-                           formControlName="otp"
-                           autocomplete="off"
-                           [class.border-danger]="landLordLoginForm.get('otp').invalid && (landLordLoginForm.get('otp').dirty || landLordLoginForm.get('otp').touched || isFormSubmitted)"/>
-                        <div *ngFor="let validation of validationMessages.otp">
-                            <small class="text-danger error" *ngIf="landLordLoginForm.get('otp').hasError(validation.type) && (landLordLoginForm.get('otp').dirty || landLordLoginForm.get('otp').touched || isFormSubmitted)">
-                                     {{validation.message}}
-                            </small>
-                         </div>
-                </div>
-                <button class="btn my-2 mx-3" (click)="resetLoginForm()">Reset</button>
-                <button class="btn my-2 mx-3" (click)="submitLandLordLoginForm()">Submit</button>
-            </form>
+<div class="container mt-4">
+    <div class="row p-2 d-flex align-items-center">
+        <div class="col-md-6 p-2">
+            <h1><b>Landlord Login</b></h1>
+            
+            <h4>Step 1</h4>
+            <p class="mb-4">Enter your Aadhaar Number in the first field provided</p>
+            
+            <h4>Step 2</h4>
+            <p class="mb-4">Click on Request OTP. A One-Time Password will be sent to your registered mobile number</p>
+            
+            <h4>Step 3</h4>
+            <p class="mb-4">Enter the OTP and click on Submit</p>
+        </div>
+        <div class="col-md-6 p-2">
+            <div class="login-card shadow container">
+                <form [formGroup]="landLordLoginForm">
+                    <div class="form-group">
+                        <label>
+                            Aadhar Number
+                            <span class="mandatory"> *</span>
+                        </label>
+                        <input type="number"
+                            class="form-control"
+                            formControlName="aadhaarNumber"
+                            autocomplete="off"
+                            [class.border-danger]="landLordLoginForm.get('aadhaarNumber').invalid && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isFormSubmitted)"/>
+                            <div *ngFor="let validation of validationMessages.aadhaarNumber">
+                                <small class="text-danger error" *ngIf="landLordLoginForm.get('aadhaarNumber').hasError(validation.type) && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isFormSubmitted)">
+                                        {{validation.message}}
+                                </small>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            OTP
+                            <span class="mandatory"> *</span>
+                        </label>
+                        <input type="number"
+                            class="form-control"
+                            formControlName="otp"
+                            autocomplete="off"
+                            [class.border-danger]="landLordLoginForm.get('otp').invalid && (landLordLoginForm.get('otp').dirty || landLordLoginForm.get('otp').touched || isFormSubmitted)"/>
+                            <div *ngFor="let validation of validationMessages.otp">
+                                <small class="text-danger error" *ngIf="landLordLoginForm.get('otp').hasError(validation.type) && (landLordLoginForm.get('otp').dirty || landLordLoginForm.get('otp').touched || isFormSubmitted)">
+                                        {{validation.message}}
+                                </small>
+                            </div>
+                    </div>    
+                    <button class="btn btn-primary my-2 me-4" (click)="resetLoginForm()">Reset</button>
+                    <button class="btn btn-primary my-2 " (click)="submitLandLordLoginForm()">Submit</button>
+                    
+                </form>
+            </div>
         </div>
     </div>
 </div>
