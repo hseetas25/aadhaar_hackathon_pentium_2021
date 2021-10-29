@@ -24,13 +24,16 @@
                             class="form-control"
                             formControlName="aadhaarNumber"
                             autocomplete="off"
-                            [class.border-danger]="landLordLoginForm.get('aadhaarNumber').invalid && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isFormSubmitted)"/>
+                            [class.border-danger]="landLordLoginForm.get('aadhaarNumber').invalid && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isNumberSubmitted)"/>
                             <div *ngFor="let validation of validationMessages.aadhaarNumber">
-                                <small class="text-danger error" *ngIf="landLordLoginForm.get('aadhaarNumber').hasError(validation.type) && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isFormSubmitted)">
+                                <small class="text-danger error" *ngIf="landLordLoginForm.get('aadhaarNumber').hasError(validation.type) && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isNumberSubmitted)">
                                         {{validation.message}}
                                 </small>
                             </div>
                     </div>
+                    <button class="btn my-2" style="background-color: #2622a5; color: white;" (click)="requestOtp()">Request Otp</button>
+                </form>
+                <form [formGroup]="otpForm">
                     <div class="form-group">
                         <label>
                             OTP
@@ -40,16 +43,28 @@
                             class="form-control"
                             formControlName="otp"
                             autocomplete="off"
-                            [class.border-danger]="landLordLoginForm.get('otp').invalid && (landLordLoginForm.get('otp').dirty || landLordLoginForm.get('otp').touched || isFormSubmitted)"/>
+                            [class.border-danger]="otpForm.get('otp').invalid && (otpForm.get('otp').dirty || otpForm.get('otp').touched || isFormSubmitted)"/>
                             <div *ngFor="let validation of validationMessages.otp">
-                                <small class="text-danger error" *ngIf="landLordLoginForm.get('otp').hasError(validation.type) && (landLordLoginForm.get('otp').dirty || landLordLoginForm.get('otp').touched || isFormSubmitted)">
+                                <small class="text-danger error" *ngIf="otpForm.get('otp').hasError(validation.type) && (otpForm.get('otp').dirty || otpForm.get('otp').touched || isFormSubmitted)">
                                         {{validation.message}}
                                 </small>
                             </div>
-                    </div>    
-                    <button class="btn btn-primary my-2 me-4" (click)="resetLoginForm()">Reset</button>
-                    <button class="btn btn-primary my-2 " (click)="submitLandLordLoginForm()">Submit</button>
-                    
+                    </div>
+                    <ngx-recaptcha2 #captchaElem
+                                    siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" (success)="handleSuccess($event)"
+                                    [size]="size"
+                                    [hl]="lang"
+                                    [theme]="theme"
+                                    [type]="type"
+                                    formControlName="recaptcha">
+                                    <div *ngFor="let validation of validationMessages.recaptcha">
+                                        <small class="text-danger error" *ngIf="otpForm.get('recaptcha').hasError(validation.type) && (otpForm.get('recaptcha').dirty || otpForm.get('recaptcha').touched || isFormSubmitted)">
+                                                {{validation.message}}
+                                        </small>
+                                    </div>
+	                </ngx-recaptcha2>   
+                    <button class="btn my-2 me-4" style="background-color: #2622a5; color: white;" (click)="resetLoginForm()">Reset</button>
+                    <button class="btn my-2 " style="background-color: #2622a5; color: white;" (click)="submitLandLordLoginForm()">Submit</button>
                 </form>
             </div>
         </div>
