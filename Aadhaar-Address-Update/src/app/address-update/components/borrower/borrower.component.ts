@@ -3,6 +3,8 @@ import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { ReCaptcha2Component } from 'ngx-captcha';
 import { Router } from '@angular/router';
 
+import { AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
+
 @Component({
   selector: 'app-borrower',
   templateUrl: './borrower.component.html',
@@ -15,8 +17,15 @@ export class BorrowerComponent implements OnInit {
   otpForm: FormGroup;
   isOtpSent: boolean;
   isNumberSubmitted: boolean;
+  isLoggedIn: boolean;
+  reqTenantForm: FormGroup;
+  isReqSubmitted: boolean;
   validationMessages = {
     aadhaarNumber: [
+      { type: 'required', message: 'Aadhaar Number is required.' },
+      { type: 'pattern', message: 'Aadhaar Number is of 12 digits.' }
+    ],
+    landLordAadhaar: [
       { type: 'required', message: 'Aadhaar Number is required.' },
       { type: 'pattern', message: 'Aadhaar Number is of 12 digits.' }
     ],
@@ -26,12 +35,17 @@ export class BorrowerComponent implements OnInit {
     ],
     recaptcha: [
       { type: 'required', message: 'Captcha Verification is required.'}
-    ]
+    ],
+    landLordNumber: [
+      { type: 'required', message: 'Phone Number is required.' },
+      { type: 'pattern', message: 'Phone Number is of 10 digits.' }
+    ],
   };
 
   validationPattern = {
     aadhaarNumber: new RegExp(`[0-9]{12}$`),
-    otp: new RegExp(`[0-9]{6}$`)
+    otp: new RegExp(`[0-9]{6}$`),
+    phNumber: new RegExp(`[0-9]{10}$`),
   };
 
   @ViewChild('captchaElem') captchaElem: ReCaptcha2Component;
@@ -49,16 +63,21 @@ export class BorrowerComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private fireBase: AngularFireDatabase
         ) {
             this.isFormSubmitted = false;
             this.isRequestInProgress = false;
             this.isNumberSubmitted = false;
             this.isOtpSent = false;
+            this.isLoggedIn = false;
+            this.isReqSubmitted = false;
+            this.loggedIn();
    }
 
   ngOnInit(): void {
       this.initializeForm();
       this.submitOtpForm();
+      this.requestForm();
   }
 
   initializeForm(): void {
@@ -88,6 +107,8 @@ export class BorrowerComponent implements OnInit {
     }
     if(this.otpForm.valid) {
       this.otpForm.controls['otp'].disable();
+      window.localStorage.setItem('user', 'present');
+      window.location.reload();
     }
   }
 
@@ -108,5 +129,33 @@ export class BorrowerComponent implements OnInit {
 
   handleSuccess(data): void {
     console.log(data);
+  }
+
+  loggedIn(): void {
+    if (localStorage.getItem('user') === 'present') {
+      console.log(localStorage.getItem('user'));
+      this.isLoggedIn = true;
+    }
+  }
+
+  requestForm(): void {
+    this.reqTenantForm = this.formBuilder.group({
+      landLordAadhaar: new FormControl(
+        '', [Validators.required, Validators.pattern(this.validationPattern.aadhaarNumber)]
+      ),
+      landLordNumber: new FormControl(
+        '', [Validators.required, Validators.pattern(this.validationPattern.phNumber)]
+      )
+    })
+  }
+
+  submitReqTenantForm(): void {
+    this.isReqSubmitted = true;
+    if(!this.reqTenantForm.valid) {
+      return;
+    }
+    if(this.reqTenantForm.valid) {
+
+    }
   }
 }
