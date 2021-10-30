@@ -22,7 +22,7 @@
     }
 
     .active::after {        // For highlight beside active nav link
-        background-color: #0b03fc;
+        background-color: var(--theme-col);
         border-radius: 4px 0 0 4px;
         content: " ";
         height: 60%;        // Calculated. Do not change unless required
@@ -42,7 +42,7 @@
     }
 
     .active::after {        // For highlight under active nav link
-        background-color: #0b03fc;
+        background-color: var(--theme-col);
         border-radius: 4px 4px 0 0;
         content: " ";
         height: 4px;

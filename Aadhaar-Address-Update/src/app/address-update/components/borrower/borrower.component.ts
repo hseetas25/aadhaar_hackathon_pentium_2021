@@ -92,9 +92,8 @@ export class BorrowerComponent implements OnInit {
   }
 
   resetLoginForm(): void {
-      this.tenantLoginForm.reset();
-      this.otpForm.reset();
-  }
+    window.location.reload();
+}
 
   requestOtp(): void {
     this.isNumberSubmitted = true;

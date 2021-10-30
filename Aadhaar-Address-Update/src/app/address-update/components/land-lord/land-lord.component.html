@@ -31,10 +31,10 @@
                                 </small>
                             </div>
                     </div>
-                    <button class="btn my-2" style="background-color: #2622a5; color: white;" (click)="requestOtp()">Request Otp</button>
+                    <button class="btn btn-primary" (click)="requestOtp()">Request Otp</button>
                 </form>
                 <form [formGroup]="otpForm">
-                    <div class="form-group">
+                    <div class="form-group mt-4">
                         <label>
                             OTP
                             <span class="mandatory"> *</span>
@@ -63,8 +63,8 @@
                                         </small>
                                     </div>
 	                </ngx-recaptcha2>   
-                    <button class="btn my-2 me-4" style="background-color: #2622a5; color: white;" (click)="resetLoginForm()">Reset</button>
-                    <button class="btn my-2 " style="background-color: #2622a5; color: white;" (click)="submitLandLordLoginForm()">Submit</button>
+                    <button class="btn btn-primary my-2 me-4" (click)="resetLoginForm()">Reset</button>
+                    <button class="btn btn-primary my-2 " (click)="submitLandLordLoginForm()">Submit</button>
                 </form>
             </div>
         </div>

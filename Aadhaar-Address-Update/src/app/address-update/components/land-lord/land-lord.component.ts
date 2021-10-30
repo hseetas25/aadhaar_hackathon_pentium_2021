@@ -18,15 +18,17 @@ export class LandLordComponent implements OnInit {
     isOtpSent: boolean;
     validationMessages = {
         aadhaarNumber: [
-          { type: 'required', message: 'Aadhaar Number is required.' }
-        ],
-        otp: [
-          { type: 'required', message: 'Otp is required.' }
-        ],
-        recaptcha: [
-          { type: 'required', message: 'Captcha Verification is required.'}
-        ]
-      };
+            { type: 'required', message: 'Aadhaar Number is required.' },
+            { type: 'pattern', message: 'Aadhaar Number is of 12 digits.' }
+          ],
+          otp: [
+            { type: 'required', message: 'Otp is required.' },
+            { type: 'pattern', message: 'Otp is of 6 digits.' }
+          ],
+          recaptcha: [
+            { type: 'required', message: 'Captcha Verification is required.'}
+          ]
+        };
     validationPattern = {
       aadhaarNumber: new RegExp(`[0-9]{12}$`),
       otp: new RegExp(`[0-9]{6}$`)
@@ -94,8 +96,7 @@ export class LandLordComponent implements OnInit {
   submitLandLordLoginForm(): void {}
 
   resetLoginForm(): void {
-      this.landLordLoginForm.reset();
-      this.otpForm.reset();
+      window.location.reload();
   }
 
   handleSuccess(data): void {
