@@ -42,7 +42,7 @@ export class LandLordComponent implements OnInit {
       public captchaIsExpired = false;
       public captchaResponse?: string;
     
-      public theme: 'dark' | 'light' = 'dark';
+      public theme: 'light' | 'dark' = 'light';
       public size: 'compact' | 'normal' = 'normal';
       public lang = 'en';
       public type: 'image' | 'audio';

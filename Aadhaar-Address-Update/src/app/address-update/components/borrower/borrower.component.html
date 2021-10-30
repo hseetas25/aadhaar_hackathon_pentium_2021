@@ -80,6 +80,10 @@
             <p class="mb-4">Enter the Aadhaar Number and Mobile Number of the Landlord to post the address update request</p>
         </div>
         <div  class="col-md-6 p-2">
+            <div style="text-align: end;">
+                <button class="btn btn-primary" (click)="logout()">Logout</button>
+            </div>
+            <br>
             <div class="login-card shadow container">
                 <div>
                     <form [formGroup]="reqTenantForm">

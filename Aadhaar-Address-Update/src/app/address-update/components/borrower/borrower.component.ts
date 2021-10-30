@@ -56,7 +56,7 @@ export class BorrowerComponent implements OnInit {
   public captchaIsExpired = false;
   public captchaResponse?: string;
 
-  public theme: 'dark' | 'light' = 'dark';
+  public theme: 'light' | 'dark' = 'light';
   public size: 'compact' | 'normal' = 'normal';
   public lang = 'en';
   public type: 'image' | 'audio';
@@ -158,4 +158,10 @@ export class BorrowerComponent implements OnInit {
 
     }
   }
+
+  logout(): void {
+    window.localStorage.clear();
+    window.location.reload();
+  }
+
 }
