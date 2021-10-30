@@ -16,7 +16,7 @@
             <div class="login-card shadow container">
                 <form [formGroup]="tenantLoginForm">
                     <div class="form-group">
-                        <label>
+                        <label class="fw-bold">
                             Aadhaar Number
                             <span class="mandatory"> *</span>
                         </label>
@@ -35,7 +35,7 @@
                 </form>
                 <form [formGroup]="otpForm">
                     <div class="form-group mt-4">
-                        <label>
+                        <label class="fw-bold">
                             OTP
                             <span class="mandatory"> *</span>
                         </label>
@@ -71,42 +71,52 @@
     </div>
 </div>
 
-<div *ngIf="isLoggedIn" class="col-md-6 p-2">
-    <div class="login-card shadow container">
-        <div>
-            <form [formGroup]="reqTenantForm">
-                <div class="form-group">
-                    <label>
-                        Land Lord Aadhar Number
-                        <span class="mandatory"> *</span>
-                    </label>
-                    <input type="number"
-                        class="form-control"
-                        formControlName="landLordAadhaar"
-                        autocomplete="off"
-                        [class.border-danger]="reqTenantForm.get('landLordAadhaar').invalid && (reqTenantForm.get('landLordAadhaar').dirty || reqTenantForm.get('landLordAadhaar').touched || isReqSubmitted)"/>
-                        <div *ngFor="let validation of validationMessages.landLordAadhaar">
-                            <small class="text-danger error" *ngIf="reqTenantForm.get('landLordAadhaar').hasError(validation.type) && (reqTenantForm.get('landLordAadhaar').dirty || reqTenantForm.get('landLordAadhaar').touched || isReqSubmitted)">
-                                    {{validation.message}}
-                            </small>
+<div *ngIf="isLoggedIn" class="container mt-4">
+    <div class="row p-2 d-flex align-items-center">
+        <div class="col-md-6 p-2">
+            <h1><b>Welcome</b></h1>
+            
+            <h4>Further Steps</h4>
+            <p class="mb-4">Enter the Aadhaar Number and Mobile Number of the Landlord to post the address update request</p>
+        </div>
+        <div  class="col-md-6 p-2">
+            <div class="login-card shadow container">
+                <div>
+                    <form [formGroup]="reqTenantForm">
+                        <div class="form-group">
+                            <label class="fw-bold">
+                                Aadhar Number of Landlord
+                                <span class="mandatory"> *</span>
+                            </label>
+                            <input type="number"
+                                class="form-control"
+                                formControlName="landLordAadhaar"
+                                autocomplete="off"
+                                [class.border-danger]="reqTenantForm.get('landLordAadhaar').invalid && (reqTenantForm.get('landLordAadhaar').dirty || reqTenantForm.get('landLordAadhaar').touched || isReqSubmitted)"/>
+                                <div *ngFor="let validation of validationMessages.landLordAadhaar">
+                                    <small class="text-danger error" *ngIf="reqTenantForm.get('landLordAadhaar').hasError(validation.type) && (reqTenantForm.get('landLordAadhaar').dirty || reqTenantForm.get('landLordAadhaar').touched || isReqSubmitted)">
+                                            {{validation.message}}
+                                    </small>
+                                </div>
+                            <label class="fw-bold mt-4">
+                                    Mobile Number of Landlord
+                                    <span class="mandatory"> *</span>
+                            </label>
+                            <input type="number"
+                                class="form-control"
+                                formControlName="landLordNumber"
+                                autocomplete="off"
+                                [class.border-danger]="reqTenantForm.get('landLordNumber').invalid && (reqTenantForm.get('landLordNumber').dirty || reqTenantForm.get('landLordNumber').touched || isReqSubmitted)"/>
+                                <div *ngFor="let validation of validationMessages.landLordNumber">
+                                    <small class="text-danger error" *ngIf="reqTenantForm.get('landLordNumber').hasError(validation.type) && (reqTenantForm.get('landLordNumber').dirty || reqTenantForm.get('landLordNumber').touched || isReqSubmitted)">
+                                            {{validation.message}}
+                                    </small>
+                                </div>
+                            <button class="btn btn-primary mt-4 me-4" (click)="submitReqTenantForm()">Submit</button>
                         </div>
-                    <label>
-                            Land Lord Mobile Number
-                            <span class="mandatory"> *</span>
-                    </label>
-                    <input type="number"
-                        class="form-control"
-                        formControlName="landLordNumber"
-                        autocomplete="off"
-                        [class.border-danger]="reqTenantForm.get('landLordNumber').invalid && (reqTenantForm.get('landLordNumber').dirty || reqTenantForm.get('landLordNumber').touched || isReqSubmitted)"/>
-                        <div *ngFor="let validation of validationMessages.landLordNumber">
-                            <small class="text-danger error" *ngIf="reqTenantForm.get('landLordNumber').hasError(validation.type) && (reqTenantForm.get('landLordNumber').dirty || reqTenantForm.get('landLordNumber').touched || isReqSubmitted)">
-                                    {{validation.message}}
-                            </small>
-                        </div>
-                    <button class="btn btn-primary my-2 me-4" (click)="submitReqTenantForm()">Submit</button>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
