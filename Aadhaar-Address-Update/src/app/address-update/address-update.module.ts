@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
 
 import { AddressUpdateRoutingModule } from './address-update-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { AddressUpdateRoutingModule } from './address-update-routing.module';
     CommonModule,
     AddressUpdateRoutingModule,
     ReactiveFormsModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    HttpClientModule
   ]
 })
 export class AddressUpdateModule { }

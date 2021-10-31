@@ -3,6 +3,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReCaptcha2Component } from 'ngx-captcha';
+import { v4 as uuidv4 } from 'uuid';
+import { OtpServiceService } from '../../services/otp-service.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-land-lord',
@@ -55,11 +59,14 @@ export class LandLordComponent implements OnInit {
   isDataPresent: boolean = false;
   userData: any= [];
   isLoggedIn: boolean;
+    txnID: any;
   
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private firestore: AngularFirestore
+        private firestore: AngularFirestore,
+        private otpService: OtpServiceService,
+        private toastr: ToastrService
         ) {
             this.isFormSubmitted = false;
             this.isRequestInProgress = false;
@@ -76,8 +83,8 @@ export class LandLordComponent implements OnInit {
 
   initializeForm(): void {
       this.landLordLoginForm = this.formBuilder.group({
-          landLordNumber: new FormControl(
-            '', [Validators.required, Validators.pattern(this.validationPattern.phNumber)]
+          aadhaarNumber: new FormControl(
+            '', [Validators.required, Validators.pattern(this.validationPattern.aadhaarNumber)]
           )
       });
   }
@@ -96,24 +103,50 @@ export class LandLordComponent implements OnInit {
 
   requestOtp(): void {
     this.isNumberSubmitted = true;
-    if (!this.landLordLoginForm.valid) {
-      return;
+    this.txnID = uuidv4();
+    localStorage.setItem('txnId', this.txnID);
+    var finalBody = {
+        "uid": this.landLordLoginForm.value.aadhaarNumber,
+        "txnId": this.txnID
     }
-    if(this.landLordLoginForm.valid) {
-      this.landLordLoginForm.controls['landLordNumber'].disable();
-      this.otpForm.controls['otp'].enable();
+    if (!this.landLordLoginForm.valid) {
+        return;
+    }
+    if (this.landLordLoginForm.valid) {
+        this.otpService.getOtp(finalBody).subscribe((data) => {
+            console.log(data);
+        })
+        this.landLordLoginForm.controls['aadhaarNumber'].disable();
+        this.otpForm.controls['otp'].enable();
     }
   }
 
   submitLandLordLoginForm(): void {
     this.isFormSubmitted = true;
-    if(!this.otpForm.valid) {
-      return;
+    if (!this.otpForm.valid) {
+        return;
     }
-    if(this.otpForm.valid) {
-      this.otpForm.controls['otp'].disable();
-      window.localStorage.setItem('user', this.landLordLoginForm.value.landLordNumber);
-      window.location.reload();
+    if (this.otpForm.valid) {
+        window.localStorage.setItem('user', this.landLordLoginForm.value.aadhaarNumber);
+        window.localStorage.setItem('otp', this.otpForm.value.otp);
+        this.otpForm.controls['otp'].disable();
+        var authBody = {
+            "uid": localStorage.getItem('user'),
+            "txnId": localStorage.getItem('txnId'),
+            "otp": localStorage.getItem('otp')
+        }
+        console.log(authBody);
+        this.otpService.authOtp(authBody).subscribe((data) => {
+            console.log(data);
+            if(data.status == 'Y' || data.status == 'y') {
+                window.localStorage.setItem('logged', "true");
+                this.toastr.success("Successful", "Login");
+            }
+            else {
+                this.toastr.warning("Invalid", "OTP");
+            }
+        })
+        window.location.reload();
     }
   }
   requests(): void {

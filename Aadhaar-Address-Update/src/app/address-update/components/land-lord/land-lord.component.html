@@ -17,16 +17,16 @@
                 <form [formGroup]="landLordLoginForm">
                     <div class="form-group">
                         <label class="fw-bold">
-                            Phone Number
+                            Aadhaar Number
                             <span class="mandatory"> *</span>
                         </label>
                         <input type="number"
                             class="form-control"
-                            formControlName="landLordNumber"
+                            formControlName="aadhaarNumber"
                             autocomplete="off"
-                            [class.border-danger]="landLordLoginForm.get('landLordNumber').invalid && (landLordLoginForm.get('landLordNumber').dirty || landLordLoginForm.get('landLordNumber').touched || isNumberSubmitted)"/>
-                            <div *ngFor="let validation of validationMessages.landLordNumber">
-                                <small class="text-danger error" *ngIf="landLordLoginForm.get('landLordNumber').hasError(validation.type) && (landLordLoginForm.get('landLordNumber').dirty || landLordLoginForm.get('landLordNumber').touched || isNumberSubmitted)">
+                            [class.border-danger]="landLordLoginForm.get('aadhaarNumber').invalid && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isNumberSubmitted)"/>
+                            <div *ngFor="let validation of validationMessages.aadhaarNumber">
+                                <small class="text-danger error" *ngIf="landLordLoginForm.get('aadhaarNumber').hasError(validation.type) && (landLordLoginForm.get('aadhaarNumber').dirty || landLordLoginForm.get('aadhaarNumber').touched || isNumberSubmitted)">
                                         {{validation.message}}
                                 </small>
                             </div>
