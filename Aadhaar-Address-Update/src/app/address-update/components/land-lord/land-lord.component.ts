@@ -161,7 +161,7 @@ export class LandLordComponent implements OnInit {
     const id: string = 'tenant-requests/'+data.tenantAadhaarNumber.toString();
     data.request = 'Rejected';
     this.firestore.doc(id).update(data);
-    await this.delay(2000);
+    await this.delay(500);
     window.location.reload();
   }
 

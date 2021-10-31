@@ -72,41 +72,47 @@
 </div>
 
 <div *ngIf="isLoggedIn" class="container mt-4">
-    <div class="row p-2 d-flex align-items-center">
-        <div class="col-md-6 p-2">
-            <h1><b>Welcome</b></h1>
-            <h4>Easy Steps to Accept the request</h4>
-            <p class="mb-4">Aadhaar Update! It's an easy process....</p>
-            <p class="mb-4 ml-4">1. Verify the mobile number of your Tenant</p>
-            <p class="mb-4ml-4">2. If found valid, Accept else Reject the request</p>
+    <div class="row p-2">
+        <div class="col-md-6 p-4">
+            <h1><b>Welcome, Landlord</b></h1>
+            <h4>To view and accept requests</h4>
+            <ul>
+                <li class="mt-4">Click on "View Requests" button</li>
+                <li class="mt-4">To accept, click on the "accept" button adjacent to the tenant you would like to accept</li>
+                <li class="mt-4">To deny the request, click on "Reject"</li>
+            </ul>
         </div>
-        <div  class="col-md-6 p-2">
-            <div style="text-align: end;">
-                <button class="btn btn-primary" (click)="logout()"><b>Logout</b></button>
-            </div>
-            <br>
-            <div *ngIf="!isDataPresent">
-                <p><b>Click the button, if you have got any new requests</b></p>
-                <button class="btn btn-primary" (click)="requests()"><b>Requests</b></button>
+        <div  class="col-md-6 p-4">
+            <div class="d-flex justify-content-between">
+                <div *ngIf="!isDataPresent">
+                    <button class="btn btn-primary" (click)="requests()"><b>View Requests</b></button>
+                </div>
+                <div style="text-align: end;">
+                    <button class="btn btn-primary mb-4" (click)="logout()"><b>Logout</b></button>
+                </div>
             </div>
             <div *ngIf="isDataPresent">
-                <p class="mb-4" style="text-align: center;"><b>Address Update Requests</b></p>
-            <table class="mt-5 mb-5">
-                <tr>
-                    <th>Tenant Aadhaar Number</th>
-                    <th>Present Status</th>
-                    <th>Action</th>
-                </tr>
-                <tr *ngFor="let data of userData">
-                        <td>{{data.tenantAadhaarNumber}}</td>
+                <h4>Address Update Requests</h4>
+            <table class="table table-hover mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-active">Tenant Aadhaar Number</th>
+                        <th scope="col" class="table-active">Present Status</th>
+                        <th scope="col" class="table-active">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of userData">
+                        <th scope="row">{{data.tenantAadhaarNumber}}</th>
                         <td>{{data.request}}</td>
                         <td>
                             <button class="btn btn-success px-3 py-1 my-2 ml-3" *ngIf="data.request=='No'" (click)="acceptRequest(this.data)">Accept</button>
                             <button class="btn btn-danger px-3 py-1 my-2 ml-3" style="margin-left:5px;"*ngIf="data.request=='No'" (click)="rejectRequest(this.data)">Reject</button>
-                            <button class="btn btn-success px-3 py-1 my-2 ml-3" *ngIf="data.request=='Accepted'">Accepted</button>
-                            <button class="btn btn-danger px-3 py-1 my-2 ml-3" *ngIf="data.request=='Rejected'">Rejected</button>
+                            <button class="btn btn-success px-3 py-1 my-2 ml-3" *ngIf="data.request=='Accepted'" disabled>Accepted</button>
+                            <button class="btn btn-danger px-3 py-1 my-2 ml-3" *ngIf="data.request=='Rejected'" disabled>Rejected</button>
                         </td>
-                </tr>
+                    </tr>
+                </tbody>
             </table>
             </div>
         </div>
