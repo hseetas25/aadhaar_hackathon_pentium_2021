@@ -1,9 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ReCaptcha2Component } from 'ngx-captcha';
-import { Router } from '@angular/router';
 
-import { AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
+
+import { TenantRequestService } from '../../services/tenant-request.service';
+import { Tenant } from '../../models';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-borrower',
@@ -20,12 +22,10 @@ export class BorrowerComponent implements OnInit {
   isLoggedIn: boolean;
   reqTenantForm: FormGroup;
   isReqSubmitted: boolean;
+  isReqSent: boolean;
+  userData: any = [];
   validationMessages = {
     aadhaarNumber: [
-      { type: 'required', message: 'Aadhaar Number is required.' },
-      { type: 'pattern', message: 'Aadhaar Number is of 12 digits.' }
-    ],
-    landLordAadhaar: [
       { type: 'required', message: 'Aadhaar Number is required.' },
       { type: 'pattern', message: 'Aadhaar Number is of 12 digits.' }
     ],
@@ -60,10 +60,11 @@ export class BorrowerComponent implements OnInit {
   public size: 'compact' | 'normal' = 'normal';
   public lang = 'en';
   public type: 'image' | 'audio';
+  isDataPresent: boolean = false;
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router,
-        private fireBase: AngularFireDatabase
+        private tenantService: TenantRequestService,
+        private firestore: AngularFirestore
         ) {
             this.isFormSubmitted = false;
             this.isRequestInProgress = false;
@@ -71,6 +72,7 @@ export class BorrowerComponent implements OnInit {
             this.isOtpSent = false;
             this.isLoggedIn = false;
             this.isReqSubmitted = false;
+            this.isReqSent = false;
             this.loggedIn();
    }
 
@@ -107,9 +109,18 @@ export class BorrowerComponent implements OnInit {
     }
     if(this.otpForm.valid) {
       this.otpForm.controls['otp'].disable();
-      window.localStorage.setItem('user', 'present');
+      window.localStorage.setItem('user', this.tenantLoginForm.value.aadhaarNumber);
       window.location.reload();
     }
+  }
+  requests(): void {
+    const id: string = 'tenant-requests/'+localStorage.getItem('user');
+      this.firestore.doc(id).get().subscribe((snapshot)=>{
+        if(snapshot.data()){
+          this.isDataPresent = true;
+          this.userData = snapshot.data();
+        }
+      })
   }
 
   resetLoginForm(): void {
@@ -128,21 +139,17 @@ export class BorrowerComponent implements OnInit {
   }
 
   handleSuccess(data): void {
-    console.log(data);
+    //console.log(data);
   }
 
   loggedIn(): void {
-    if (localStorage.getItem('user') === 'present') {
-      console.log(localStorage.getItem('user'));
+    if (localStorage.getItem('user')) {
       this.isLoggedIn = true;
     }
   }
 
   requestForm(): void {
     this.reqTenantForm = this.formBuilder.group({
-      landLordAadhaar: new FormControl(
-        '', [Validators.required, Validators.pattern(this.validationPattern.aadhaarNumber)]
-      ),
       landLordNumber: new FormControl(
         '', [Validators.required, Validators.pattern(this.validationPattern.phNumber)]
       )
@@ -155,7 +162,12 @@ export class BorrowerComponent implements OnInit {
       return;
     }
     if(this.reqTenantForm.valid) {
-
+      this.reqTenantForm.value.tenantAadhaarNumber = localStorage.getItem('user');
+      this.tenantService.createRequest(this.reqTenantForm.value as Tenant).subscribe((data)=>{
+        if(data.isSuccessful) {
+          this.isReqSent = true;
+        }
+      });
     }
   }
 

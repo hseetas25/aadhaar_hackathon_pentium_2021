@@ -5,13 +5,13 @@
 export const environment = {
     production : false,
     firebaseConfig : {
-        apiKey: "AIzaSyAXmERaJkURLcXFODps0wvmlc7ZAJu1Wyo",
-        authDomain: "aadhaar-update-600b4.firebaseapp.com",
-        projectId: "aadhaar-update-600b4",
-        storageBucket: "aadhaar-update-600b4.appspot.com",
-        messagingSenderId: "390277521101",
-        appId: "1:390277521101:web:88a60c317166156aaf1384",
-        measurementId: "G-KCTE1DTN5Y"
+        apiKey: "AIzaSyBzKCTemV3QbzGv2XjH4o9Cdjdjuys9fa8",
+        authDomain: "aadhar-address-ff536.firebaseapp.com",
+        projectId: "aadhar-address-ff536",
+        storageBucket: "aadhar-address-ff536.appspot.com",
+        messagingSenderId: "101737861094",
+        appId: "1:101737861094:web:41ddd64beb83a9d17d9027",
+        measurementId: "G-RK5TP3E3DG"
       }
 };
 
