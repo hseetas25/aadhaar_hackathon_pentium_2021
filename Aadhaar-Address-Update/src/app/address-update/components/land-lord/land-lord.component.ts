@@ -188,6 +188,20 @@ export class LandLordComponent implements OnInit {
     this.firestore.doc(id).update(data);
     await this.delay(2000);
     window.location.reload();
+    const temp: string = `landlord-requests/`+localStorage.getItem('user');
+    this.firestore.collection(`landlord-requests`).get().subscribe((snap)=>{
+      if(snap){
+        snap.forEach((d)=>{
+          const temp = d.data();
+          if(temp['landLordAadhaar']==localStorage.getItem('user')){
+            const addr = temp['landLordAddress'];
+            data.landLordAddress = addr;
+            this.firestore.doc(id).update(data);
+          }
+        })
+      }
+    });
+    
   }
 
   async rejectRequest(data: any): Promise<void> {

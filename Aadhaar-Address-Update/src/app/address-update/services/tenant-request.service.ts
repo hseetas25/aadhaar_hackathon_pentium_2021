@@ -15,6 +15,7 @@ export class TenantRequestService {
 
   createRequest(data: Tenant): Observable<any> {
     data.request = 'No';
+    data.landLordAddress ='';
     const tenantRequestData: Tenant = JSON.parse(JSON.stringify(data)) as Tenant;
     return new Observable((sub) => {
       if (tenantRequestData) {
