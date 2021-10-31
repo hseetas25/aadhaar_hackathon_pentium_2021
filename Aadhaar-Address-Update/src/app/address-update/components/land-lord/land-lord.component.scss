@@ -22,3 +22,18 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+table, th, td {
+    border : 2px solid black;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+      padding: 15px;
+  }
+  
+  th {
+      color: black;
+      text-align: center;
+      font-weight: bold;
+  }
