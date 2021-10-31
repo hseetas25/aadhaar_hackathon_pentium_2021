@@ -3,6 +3,7 @@ import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { ReCaptcha2Component } from 'ngx-captcha';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
+import { xml2json } from 'xml-js'
 
 import { TenantRequestService } from '../../services/tenant-request.service';
 import { Tenant } from '../../models';
@@ -137,8 +138,11 @@ export class BorrowerComponent implements OnInit {
 
             this.otpService.getKyc(authBody).subscribe((data) => {
                 console.log(data);
+                var xml = data.eKycString;
+                var result = xml2json(xml, {compact: true, spaces: 4});
+                console.log(result);
             })
-            // window.location.reload();
+            window.location.reload();
         }
     }
 
